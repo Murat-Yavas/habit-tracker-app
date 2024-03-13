@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(#222c31, #111d32);
+  min-height: 100vh;
+}

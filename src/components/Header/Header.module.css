@@ -1,0 +1,17 @@
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  color: white;
+  background: #7f949f;
+  margin-bottom: 5rem;
+}
+
+.site-logo {
+  margin-left: 1rem;
+}
+
+.user-session {
+  margin-right: 1rem;
+}
