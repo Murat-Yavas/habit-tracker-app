@@ -1,13 +1,31 @@
 import { useState } from "react";
 import styles from "./DailyTracker.module.css";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { dailyActions } from "../../redux/daily-slice";
 
 const DailyTracker = () => {
   const [isShownForm, setIsShownForm] = useState(false);
+  const [habitText, setHabitText] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
-  const handleAddDaily = () => {
+  const dispatch = useAppDispatch();
+  const habit = useAppSelector((state) => state.daily.userHabit);
+  console.log(habit);
+
+  const handleAddHabit = () => {
     setIsShownForm(true);
+  };
+
+  const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const userHabit = {
+      habitName: habitText,
+      startTime,
+      endTime,
+    };
+    dispatch(dailyActions.addHabit(userHabit));
   };
 
   return (
@@ -16,13 +34,13 @@ const DailyTracker = () => {
         <h2>Your daily plan</h2>
       </div>
 
-      <div className={`${styles["habit-area"]} container`}>
+      <div className="container">
         <div className={`${styles.daily} row`}>
-          <div className={`${styles["add-habit-section"]} col-3`}>
+          <div className={`${styles["add-habit-section"]} col-4`}>
             {!isShownForm ? (
               <button
                 className={styles["add-habit-button"]}
-                onClick={handleAddDaily}
+                onClick={handleAddHabit}
               >
                 Add a new daily plan
               </button>
@@ -32,23 +50,27 @@ const DailyTracker = () => {
                 <Form className={styles["habit-form"]}>
                   <Form.Group className="mb-3" controlId="formBasicHabit">
                     <Form.Label>Habit</Form.Label>
-                    <Form.Control type="text" placeholder="Enter habit" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter habit"
+                      onChange={(e) => setHabitText(e.target.value)}
+                    />
                   </Form.Group>
                   <div className="mb-3">
                     <label>Start Time</label>
                     <input
+                      onChange={(e) => setStartTime(e.target.value)}
                       type="time"
                       className="form-control"
-                      value="10:05 AM"
                     />
                   </div>
 
                   <div className="mb-3">
                     <label>End Time</label>
                     <input
+                      onChange={(e) => setEndTime(e.target.value)}
                       type="time"
                       className="form-control"
-                      value="10:05 AM"
                     />
                   </div>
 
@@ -59,12 +81,19 @@ const DailyTracker = () => {
                     >
                       Cancel
                     </button>
-                    <button className={styles["add-habit-button"]}>Save</button>
+                    <button
+                      className={styles["add-habit-button"]}
+                      onClick={handleSave}
+                    >
+                      Save
+                    </button>
                   </div>
                 </Form>
               </>
             )}
           </div>
+
+          <div className={`${styles["daily-habits"]} col-4`}></div>
         </div>
       </div>
     </>

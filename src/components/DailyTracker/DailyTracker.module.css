@@ -5,8 +5,9 @@
   margin-bottom: 1.5rem;
 }
 
-.habit-area {
+.add-habit-section {
   color: white;
+  border-right: 2px solid white;
 }
 
 .add-habit-button {
