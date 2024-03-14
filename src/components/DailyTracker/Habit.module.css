@@ -1,0 +1,43 @@
+.daily-habits {
+  color: white;
+  border-right: 2px solid white;
+  position: relative;
+}
+
+.daily-habit {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #65c6fa;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.daily-habit:hover,
+.create-daily-button:hover {
+  background: #79abc8;
+  border-color: #79abc8;
+  transition: 0.2s;
+}
+
+.daily-habit-time {
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.05em;
+}
+
+.create-daily-button {
+  color: white;
+  background-color: #7f949f;
+  border-color: #7f949f;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+
+  position: absolute;
+  right: 10px;
+}

@@ -8,9 +8,10 @@ interface UserHabit {
 
 interface DailyState {
   userHabit: UserHabit[];
+  dailyPlan: UserHabit[][];
 }
 
-const initialState: DailyState = { userHabit: [] };
+const initialState: DailyState = { userHabit: [], dailyPlan: [] };
 
 const dailySlice = createSlice({
   name: "daily",
@@ -29,6 +30,11 @@ const dailySlice = createSlice({
         startTime: action.payload.startTime,
         endTime: action.payload.endTime,
       });
+    },
+
+    createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
+      state.dailyPlan.pop();
+      state.dailyPlan.push(action.payload);
     },
   },
 });
