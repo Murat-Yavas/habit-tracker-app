@@ -12,6 +12,11 @@
   margin-left: 1rem;
 }
 
+.site-name {
+  text-decoration: none;
+  color: white;
+}
+
 .user-session {
   margin-right: 1rem;
 }
