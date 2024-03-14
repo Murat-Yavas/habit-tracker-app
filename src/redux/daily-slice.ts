@@ -4,6 +4,7 @@ interface UserHabit {
   habitName: string;
   startTime: string;
   endTime: string;
+  id: number;
 }
 
 interface DailyState {
@@ -29,7 +30,15 @@ const dailySlice = createSlice({
         habitName: action.payload.habitName,
         startTime: action.payload.startTime,
         endTime: action.payload.endTime,
+        id: state.userHabit.length,
       });
+    },
+
+    deleteHabit: (state, action: PayloadAction<number>) => {
+      const newHabits = state.userHabit.filter(
+        (habit) => habit.id !== action.payload
+      );
+      state.userHabit = newHabits;
     },
 
     createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {

@@ -5,7 +5,6 @@ import planImg from "../../assets/plan1.jpg";
 
 const DailyPlan = () => {
   const dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
-  console.log(dailyPlan);
 
   return (
     <div className={`${styles["daily-plan"]} col-4`}>

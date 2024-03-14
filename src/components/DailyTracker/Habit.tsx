@@ -5,9 +5,14 @@ import styles from "./Habit.module.css";
 const Habit = () => {
   const dispatch = useAppDispatch();
   const habits = useAppSelector((state) => state.daily.userHabit);
+  console.log(habits);
 
   const createDaily = (): void => {
     dispatch(dailyActions.createDailyPlan(habits));
+  };
+
+  const HandledeleteHabit = (id: number) => {
+    dispatch(dailyActions.deleteHabit(id));
   };
 
   return (
@@ -18,17 +23,19 @@ const Habit = () => {
             <h4 className="mb-4">Your daily habits </h4>
             <div className="container">
               {habits.map((habit) => (
-                <div
-                  key={habit.habitName}
-                  className={`${styles["daily-habit"]} row`}
-                >
+                <div key={habit.id} className={`${styles["daily-habit"]} row`}>
                   <div className={`${styles["daily-habit-name"]} col-4`}>
                     {habit.habitName}
                   </div>
                   <div className={`${styles["daily-habit-time"]} col-6`}>
                     {habit.startTime} - {habit.endTime}
                   </div>
-                  <div className="col-2">X</div>
+                  <div
+                    className="col-2"
+                    onClick={() => HandledeleteHabit(habit.id)}
+                  >
+                    X
+                  </div>
                 </div>
               ))}
             </div>
