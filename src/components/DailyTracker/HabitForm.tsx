@@ -3,6 +3,7 @@ import styles from "./HabitForm.module.css";
 import Form from "react-bootstrap/Form";
 import { useAppDispatch } from "../../redux/hooks";
 import { dailyActions } from "../../redux/daily-slice";
+import Button from "../UI/Button";
 
 const HabitForm = () => {
   const [isShownForm, setIsShownForm] = useState(false);
@@ -42,7 +43,9 @@ const HabitForm = () => {
 
   return (
     <>
-      <div className={`${styles["add-habit-section"]} col-4`}>
+      <div
+        className={`${styles["add-habit-section"]} mb-5 col-md-mb-0 col-12 col-md-4`}
+      >
         {!isShownForm ? (
           <button
             className={styles["add-habit-button"]}
@@ -65,7 +68,7 @@ const HabitForm = () => {
                 />
               </Form.Group>
               <div className="mb-3">
-                <label>Start Time</label>
+                <Form.Label>Start Time</Form.Label>
                 <input
                   onChange={(e) => setStartTime(e.target.value)}
                   type="time"
@@ -75,7 +78,7 @@ const HabitForm = () => {
               </div>
 
               <div className="mb-3">
-                <label>End Time</label>
+                <Form.Label>End Time</Form.Label>
                 <input
                   onChange={(e) => setEndTime(e.target.value)}
                   type="time"
@@ -85,18 +88,16 @@ const HabitForm = () => {
               </div>
 
               <div className={`${styles["form-buttons"]}`}>
-                <button
+                <Button
                   onClick={() => setIsShownForm(false)}
                   className={`${styles["add-habit-button"]} ${styles["form-button"]}`}
-                >
-                  Cancel
-                </button>
-                <button
+                  children="Cancel"
+                />
+                <Button
                   className={styles["add-habit-button"]}
                   onClick={handleSave}
-                >
-                  Save
-                </button>
+                  children="Save"
+                />
               </div>
             </Form>
           </>

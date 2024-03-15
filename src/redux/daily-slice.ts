@@ -34,6 +34,10 @@ const dailySlice = createSlice({
       });
     },
 
+    setHabits: (state, action: PayloadAction<UserHabit[]>) => {
+      state.userHabit = action.payload;
+    },
+
     deleteHabit: (state, action: PayloadAction<number>) => {
       const newHabits = state.userHabit.filter(
         (habit) => habit.id !== action.payload

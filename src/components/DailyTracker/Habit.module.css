@@ -4,30 +4,6 @@
   position: relative;
 }
 
-.daily-habit {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background: #65c6fa;
-  cursor: pointer;
-  border-radius: 5px;
-  padding: 0.25rem;
-  margin-bottom: 1rem;
-}
-
-.daily-habit:hover,
-.create-daily-button:hover {
-  background: #79abc8;
-  border-color: #79abc8;
-  transition: 0.2s;
-}
-
-.daily-habit-time {
-  display: flex;
-  justify-content: space-between;
-  letter-spacing: 0.05em;
-}
-
 .create-daily-button {
   color: white;
   background-color: #7f949f;
@@ -40,4 +16,10 @@
 
   position: absolute;
   right: 10px;
+}
+
+.create-daily-button:hover {
+  background: #79abc8;
+  border-color: #79abc8;
+  transition: 0.2s;
 }

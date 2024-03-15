@@ -1,0 +1,26 @@
+.daily-habit {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #65c6fa;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.daily-habit:hover {
+  background: #79abc8;
+  border-color: #79abc8;
+  transition: 0.2s;
+}
+
+.daily-habit-time {
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.05em;
+}
+
+.delete-button {
+  z-index: 1;
+}

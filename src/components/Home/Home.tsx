@@ -36,7 +36,7 @@ const Home = () => {
             Organize your week realistically
           </Card.Title>
 
-          <NavLink to="/" className={`${styles.button}`}>
+          <NavLink to="/weekly" className={`${styles.button}`}>
             Weekly Plan
           </NavLink>
         </Card.Body>
