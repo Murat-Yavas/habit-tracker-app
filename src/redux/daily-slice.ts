@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface UserHabit {
+export interface UserHabit {
   habitName: string;
   startTime: string;
   endTime: string;
@@ -46,7 +46,7 @@ const dailySlice = createSlice({
     },
 
     createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
-      state.dailyPlan.pop();
+      // state.dailyPlan.pop();
       state.dailyPlan.push(action.payload);
     },
   },

@@ -14,6 +14,7 @@ const Habit = () => {
 
   const createDaily = (): void => {
     dispatch(dailyActions.createDailyPlan(habits));
+    dispatch(dailyActions.setHabits([]));
   };
 
   return (
@@ -43,7 +44,7 @@ const Habit = () => {
             <Button
               className={`${styles["create-daily-button"]}`}
               onClick={createDaily}
-              children="Create"
+              children="Create a new daily plan"
             />
           </div>
         </>
