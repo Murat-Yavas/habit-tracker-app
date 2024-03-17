@@ -1,15 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { days } from "../helpers/Constants";
 
 export interface UserHabit {
+  day: string;
   habitName: string;
   startTime: string;
   endTime: string;
   id: number;
+  habitsOfDay?: string[];
+  dayId: number;
 }
 
 interface DailyState {
   userHabit: UserHabit[];
-  dailyPlan: UserHabit[][];
+  dailyPlan: UserHabit[];
 }
 
 const initialState: DailyState = { userHabit: [], dailyPlan: [] };
@@ -24,14 +28,26 @@ const dailySlice = createSlice({
         habitName: string;
         startTime: string;
         endTime: string;
+        day: string;
       }>
     ) => {
-      state.userHabit.push({
-        habitName: action.payload.habitName,
-        startTime: action.payload.startTime,
-        endTime: action.payload.endTime,
-        id: state.userHabit.length,
-      });
+      let day = state.userHabit.find(
+        (habit) => habit.day === action.payload.day
+      );
+      if (!day) {
+        state.userHabit.push({
+          day: action.payload.day,
+          habitName: action.payload.habitName,
+          startTime: action.payload.startTime,
+          endTime: action.payload.endTime,
+          id: state.userHabit.length,
+          habitsOfDay: [action.payload.habitName],
+          dayId: days.indexOf(action.payload.day),
+        });
+        state.userHabit.sort((a, b) => (a.dayId > b.dayId ? 1 : -1));
+      } else {
+        day.habitsOfDay?.push(action.payload.habitName);
+      }
     },
 
     setHabits: (state, action: PayloadAction<UserHabit[]>) => {
@@ -46,8 +62,7 @@ const dailySlice = createSlice({
     },
 
     createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
-      // state.dailyPlan.pop();
-      state.dailyPlan.push(action.payload);
+      state.dailyPlan = action.payload;
     },
   },
 });

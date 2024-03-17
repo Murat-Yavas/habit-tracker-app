@@ -1,23 +1,27 @@
+import { NavLink } from "react-router-dom";
 import { dailyActions } from "../../redux/daily-slice";
 import { useAppDispatch } from "../../redux/hooks";
 import styles from "./HabitItem.module.css";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
 interface HabitItem {
   id: number;
   habitName: string;
   startTime: string;
   endTime: string;
+  day: string;
   key: number;
+  createDailyFn: () => void;
 }
 
-const HabitItem = ({ id, habitName, startTime, endTime }: HabitItem) => {
+const HabitItem = ({
+  id,
+  habitName,
+  startTime,
+  endTime,
+  day,
+  createDailyFn,
+}: HabitItem) => {
   const dispatch = useAppDispatch();
-
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
-  const style = { transition, transform: CSS.Transform.toString(transform) };
 
   const HandledeleteHabit = (
     e: React.MouseEvent<HTMLDivElement>,
@@ -28,24 +32,23 @@ const HabitItem = ({ id, habitName, startTime, endTime }: HabitItem) => {
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      style={style}
-      key={id}
-      className={`${styles["daily-habit"]} row`}
-    >
-      <div className={`${styles["daily-habit-name"]} col-4`}>{habitName}</div>
-      <div className={`${styles["daily-habit-time"]} col-6`}>
+    <div key={id} className={`${styles["daily-habit"]} row`}>
+      <NavLink
+        onClick={createDailyFn}
+        to="/daily/details"
+        className={`${styles["daily-habit-name"]} col-12 text-center`}
+      >
+        {day}
+      </NavLink>
+      {/* <div className={`${styles["daily-habit-time"]} col-6`}>
         {startTime} - {endTime}
-      </div>
-      <div
+      </div> */}
+      {/* <div
         className={`${styles["delete-button"]} col-2`}
         onClick={(e) => HandledeleteHabit(e, id)}
       >
         X
-      </div>
+      </div> */}
     </div>
   );
 };

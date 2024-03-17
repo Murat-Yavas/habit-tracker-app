@@ -2,11 +2,10 @@ import { useAppSelector } from "../../redux/hooks";
 import styles from "./DailyPlan.module.css";
 import Card from "react-bootstrap/Card";
 import planImg from "../../assets/plan1.jpg";
-import Button from "../UI/Button";
+import { NavLink } from "react-router-dom";
 
 const DailyPlan = () => {
   const dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
-  console.log(dailyPlan);
 
   return (
     <div className={`${styles["daily-plan"]} mt-5 col-md-mt-0 col-12 col-md-4`}>
@@ -17,10 +16,12 @@ const DailyPlan = () => {
             <Card.Title className={`${styles["daily-title"]} mb-3 text-center`}>
               Your Daily Plan
             </Card.Title>
-            <Button
+            <NavLink
               className={`${styles["details-button"]}`}
-              children="See Details"
-            />
+              to="/daily/details"
+            >
+              See details
+            </NavLink>
           </Card.Body>
         </Card>
       ) : (

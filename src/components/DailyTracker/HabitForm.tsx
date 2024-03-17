@@ -4,9 +4,11 @@ import Form from "react-bootstrap/Form";
 import { useAppDispatch } from "../../redux/hooks";
 import { dailyActions } from "../../redux/daily-slice";
 import Button from "../UI/Button";
+import { days } from "../../helpers/Constants";
 
 const HabitForm = () => {
   const [isShownForm, setIsShownForm] = useState(false);
+  const [day, setDay] = useState("");
   const [habitText, setHabitText] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -33,18 +35,19 @@ const HabitForm = () => {
         habitName: habitText,
         startTime,
         endTime,
+        day,
       };
       dispatch(dailyActions.addHabit(userHabit));
+      setHabitText("");
+      setStartTime("");
+      setEndTime("");
     }
-    setHabitText("");
-    setStartTime("");
-    setEndTime("");
   };
 
   return (
     <>
       <div
-        className={`${styles["add-habit-section"]} mb-5 col-md-mb-0 col-12 col-md-4`}
+        className={`${styles["add-habit-section"]} mb-5 col-md-mb-0 col-12 col-md-6`}
       >
         {!isShownForm ? (
           <button
@@ -58,6 +61,24 @@ const HabitForm = () => {
             <h4 className="mb-3">Let's add your habit</h4>
 
             <Form className={styles["habit-form"]}>
+              <div className={`${styles["day-options"]}`}>
+                <Form.Label htmlFor="days">Day</Form.Label>
+                <Form.Select
+                  id="days"
+                  className="mb-3"
+                  value={day}
+                  onChange={(e) => setDay(e.target.value)}
+                >
+                  <option value="DEFAULT">Choose a day</option>
+
+                  {days.map((day) => (
+                    <option key={day} value={day}>
+                      {day}
+                    </option>
+                  ))}
+                </Form.Select>
+              </div>
+
               <Form.Group className="mb-3" controlId="formBasicHabit">
                 <Form.Label>Habit</Form.Label>
                 <Form.Control
@@ -67,9 +88,10 @@ const HabitForm = () => {
                   value={habitText}
                 />
               </Form.Group>
+
               <div className="mb-3">
                 <Form.Label>Start Time</Form.Label>
-                <input
+                <Form.Control
                   onChange={(e) => setStartTime(e.target.value)}
                   type="time"
                   className="form-control"
@@ -79,7 +101,7 @@ const HabitForm = () => {
 
               <div className="mb-3">
                 <Form.Label>End Time</Form.Label>
-                <input
+                <Form.Control
                   onChange={(e) => setEndTime(e.target.value)}
                   type="time"
                   className="form-control"

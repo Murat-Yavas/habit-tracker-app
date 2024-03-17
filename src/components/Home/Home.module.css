@@ -1,3 +1,19 @@
+.home {
+  color: white;
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: large;
+  margin-bottom: 3rem;
+}
+
+.quote-text {
+  font-style: italic;
+}
+
 .tracker-cards {
   display: flex;
   justify-content: space-around;

@@ -1,12 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { dailyActions } from "../../redux/daily-slice";
 import styles from "./Habit.module.css";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+
 import HabitItem from "./HabitItem";
-import Button from "../UI/Button";
 
 const Habit = () => {
   const dispatch = useAppDispatch();
@@ -14,38 +10,28 @@ const Habit = () => {
 
   const createDaily = (): void => {
     dispatch(dailyActions.createDailyPlan(habits));
-    dispatch(dailyActions.setHabits([]));
+    // dispatch(dailyActions.setHabits([]));
   };
 
   return (
     <div
-      className={`${styles["daily-habits"]} mb-5 col-md-mb-0 col-12 col-md-4`}
+      className={`${styles["daily-habits"]} mb-5 col-md-mb-0 col-12 col-md-6`}
     >
       {habits.length > 0 ? (
         <>
-          <h4 className="mb-4">Your daily habits </h4>
+          <h4 className="mb-4">Your daily plans</h4>
           <div className="container">
-            <SortableContext
-              items={habits}
-              strategy={verticalListSortingStrategy}
-            >
-              {habits.map((habit: any) => (
-                <HabitItem
-                  id={habit.id}
-                  habitName={habit.habitName}
-                  startTime={habit.startTime}
-                  endTime={habit.endTime}
-                  key={habit.id}
-                />
-              ))}
-            </SortableContext>
-          </div>
-          <div>
-            <Button
-              className={`${styles["create-daily-button"]}`}
-              onClick={createDaily}
-              children="Create a new daily plan"
-            />
+            {habits.map((habit) => (
+              <HabitItem
+                id={habit.id}
+                habitName={habit.habitName}
+                startTime={habit.startTime}
+                endTime={habit.endTime}
+                day={habit.day}
+                key={habit.id}
+                createDailyFn={createDaily}
+              />
+            ))}
           </div>
         </>
       ) : (
