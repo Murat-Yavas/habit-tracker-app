@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./HabitForm.module.css";
 import Form from "react-bootstrap/Form";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { dailyActions } from "../../redux/daily-slice";
 import Button from "../UI/Button";
 import { days } from "../../helpers/Constants";
@@ -14,10 +14,7 @@ const HabitForm = () => {
   const [endTime, setEndTime] = useState("");
 
   const dispatch = useAppDispatch();
-
-  const handleAddHabit = () => {
-    setIsShownForm(true);
-  };
+  const habits = useAppSelector((state) => state.daily.userHabit);
 
   const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -46,17 +43,27 @@ const HabitForm = () => {
 
   return (
     <>
-      <div
-        className={`${styles["add-habit-section"]} mb-5 col-md-mb-0 col-12 col-md-6`}
-      >
-        {!isShownForm ? (
-          <button
-            className={styles["add-habit-button"]}
-            onClick={handleAddHabit}
-          >
-            Add a new daily plan
-          </button>
-        ) : (
+      {!isShownForm ? (
+        <>
+          {habits.length > 0 ? (
+            ""
+          ) : (
+            <h2 className={`${styles["plan-title"]}`}>No plans yet.</h2>
+          )}
+
+          <div className={`${styles["add-button-area"]}`}>
+            <Button
+              className={`${styles["add-habit-button"]}`}
+              onClick={() => setIsShownForm(true)}
+            >
+              Add a new daily plan
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div
+          className={`${styles["add-habit-section"]} mb-5 col-md-mb-0 col-12 col-md-6`}
+        >
           <>
             <h4 className="mb-3">Let's add your habit</h4>
 
@@ -123,8 +130,8 @@ const HabitForm = () => {
               </div>
             </Form>
           </>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

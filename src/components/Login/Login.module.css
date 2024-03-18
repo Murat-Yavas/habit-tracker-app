@@ -1,0 +1,16 @@
+.form-area {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.login-form {
+  width: 40vw;
+  position: relative;
+}
+
+.login-button {
+  padding: 0.5rem 0.75rem;
+  position: absolute;
+  right: 0;
+}

@@ -15,8 +15,7 @@
   transition: 0.2s;
 }
 
-.daily-habit-time {
-  display: flex;
-  justify-content: space-between;
-  letter-spacing: 0.05em;
+.daily-habit-name {
+  text-decoration: none;
+  color: white;
 }

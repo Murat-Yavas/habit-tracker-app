@@ -1,34 +1,45 @@
 .daily-details-card {
   position: relative;
+  margin-bottom: 2rem;
+}
+
+.card-body {
+  margin-bottom: 2.75rem;
+  height: 125px;
+  overflow-y: scroll;
+}
+
+.card-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.daily-habit-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #65c6fa;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.daily-habit-info:hover {
+  background: #79abc8;
+  border-color: #79abc8;
+  transition: 0.2s;
 }
 
 .view-button {
-  color: white;
-  background-color: #7f949f;
-  border-color: #7f949f;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  text-decoration: none;
+  margin-top: 0.5rem;
   padding: 0.25rem;
-  border-radius: 5px;
 
   position: absolute;
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.view-button:hover,
-.view-button:active,
-.view-button:focus {
-  background: #79abc8;
-  color: white;
-  border-color: #79abc8;
-  transition: 0.2s;
-}
-
-.card-body {
-  margin-bottom: 2rem;
 }
 
 .card-image {

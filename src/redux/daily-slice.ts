@@ -8,6 +8,8 @@ export interface UserHabit {
   endTime: string;
   id: number;
   habitsOfDay?: string[];
+  habitsStartTime: string[];
+  habitsEndTime: string[];
   dayId: number;
 }
 
@@ -42,17 +44,21 @@ const dailySlice = createSlice({
           endTime: action.payload.endTime,
           id: state.userHabit.length,
           habitsOfDay: [action.payload.habitName],
+          habitsStartTime: [action.payload.startTime],
+          habitsEndTime: [action.payload.endTime],
           dayId: days.indexOf(action.payload.day),
         });
         state.userHabit.sort((a, b) => (a.dayId > b.dayId ? 1 : -1));
       } else {
         day.habitsOfDay?.push(action.payload.habitName);
+        day.habitsStartTime.push(action.payload.startTime);
+        day.habitsEndTime.push(action.payload.endTime);
       }
     },
 
-    setHabits: (state, action: PayloadAction<UserHabit[]>) => {
-      state.userHabit = action.payload;
-    },
+    // setHabits: (state, action: PayloadAction<UserHabit[]>) => {
+    //   state.userHabit = action.payload;
+    // },
 
     deleteHabit: (state, action: PayloadAction<number>) => {
       const newHabits = state.userHabit.filter(
@@ -61,11 +67,14 @@ const dailySlice = createSlice({
       state.userHabit = newHabits;
     },
 
-    createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
-      state.dailyPlan = action.payload;
-    },
+    // createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
+    //   state.dailyPlan = action.payload;
+    // },
   },
 });
 
 export const dailyActions = dailySlice.actions;
 export default dailySlice;
+
+// action.payload.startTime,
+// action.payload.endTime,

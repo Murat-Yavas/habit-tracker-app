@@ -10,7 +10,11 @@ const Header = () => {
         </NavLink>
       </div>
 
-      <div className={styles["user-session"]}>Sign In / Sign Up</div>
+      <div className={styles["user-session"]}>
+        <NavLink to="./login" className={styles["site-name"]}>
+          Sign In / Sign Up
+        </NavLink>
+      </div>
     </div>
   );
 };

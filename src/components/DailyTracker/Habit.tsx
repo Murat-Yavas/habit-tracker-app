@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { dailyActions } from "../../redux/daily-slice";
 import styles from "./Habit.module.css";
 
 import HabitItem from "./HabitItem";
@@ -8,10 +7,10 @@ const Habit = () => {
   const dispatch = useAppDispatch();
   const habits = useAppSelector((state) => state.daily.userHabit);
 
-  const createDaily = (): void => {
-    dispatch(dailyActions.createDailyPlan(habits));
-    // dispatch(dailyActions.setHabits([]));
-  };
+  // const createDaily = (): void => {
+  //   dispatch(dailyActions.createDailyPlan(habits));
+  //   // dispatch(dailyActions.setHabits([]));
+  // };
 
   return (
     <div
@@ -24,12 +23,9 @@ const Habit = () => {
             {habits.map((habit) => (
               <HabitItem
                 id={habit.id}
-                habitName={habit.habitName}
-                startTime={habit.startTime}
-                endTime={habit.endTime}
                 day={habit.day}
                 key={habit.id}
-                createDailyFn={createDaily}
+                // createDailyFn={createDaily}
               />
             ))}
           </div>

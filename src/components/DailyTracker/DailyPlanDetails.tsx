@@ -3,7 +3,9 @@ import CardUI from "../UI/CardUI";
 import dayImg from "../../assets/HomePlan3.jpg";
 
 const DailyPlanDetails = () => {
-  const dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
+  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
+  // const habits = useAppSelector((state) => state.daily.userHabit);
+  // console.log(habits);
   console.log(dailyPlan);
 
   return (
@@ -14,8 +16,9 @@ const DailyPlanDetails = () => {
             key={plan.id}
             src={dayImg}
             title={plan.day.toUpperCase()}
-            cardText={plan.habitsOfDay}
-            buttonText="View"
+            cardHabitText={plan.habitsOfDay}
+            habitsStartTimeText={plan.habitsStartTime}
+            habitsEndTimeText={plan.habitsEndTime}
           />
         ))}
       </div>

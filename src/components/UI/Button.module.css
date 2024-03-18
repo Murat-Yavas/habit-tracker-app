@@ -1,0 +1,16 @@
+.customBtn:hover,
+.customBtn:focus {
+  background: #79abc8;
+  border-color: #79abc8;
+  transition: 0.2s;
+}
+
+.customBtn {
+  color: white;
+  background-color: #7f949f;
+  border-color: #7f949f;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  border-radius: 5px;
+}

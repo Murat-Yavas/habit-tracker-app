@@ -4,21 +4,7 @@
 }
 
 .create-daily-button {
-  color: white;
-  background-color: #7f949f;
-  border-color: #7f949f;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-  text-decoration: none;
   padding: 0.5rem 0.75rem;
-  border-radius: 5px;
-
   position: absolute;
   right: 10px;
-}
-
-.create-daily-button:hover {
-  background: #79abc8;
-  border-color: #79abc8;
-  transition: 0.2s;
 }

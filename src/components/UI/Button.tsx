@@ -1,3 +1,5 @@
+import styles from "./Button.module.css";
+
 interface ButtonProps {
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -6,7 +8,7 @@ interface ButtonProps {
 
 const Button = ({ className, onClick, children }: ButtonProps) => {
   return (
-    <button className={className} onClick={onClick}>
+    <button className={`${styles.customBtn} ${className}`} onClick={onClick}>
       {children}
     </button>
   );
