@@ -10,12 +10,13 @@ import { useEffect } from "react";
 const Home = () => {
   const dispatch = useAppDispatch();
   const { quotes } = useAppSelector((state) => state.quotes);
+  const { isLogin } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     getQuotes(dispatch);
   }, []);
 
-  return (
+  return isLogin ? (
     <div className={styles.home}>
       <div className={styles.quote}>
         {quotes.length > 0 ? (
@@ -67,6 +68,10 @@ const Home = () => {
         </Card>
       </div>
     </div>
+  ) : (
+    <h2 className="text-white text-center">
+      You need to login to create a tracker plan
+    </h2>
   );
 };
 
