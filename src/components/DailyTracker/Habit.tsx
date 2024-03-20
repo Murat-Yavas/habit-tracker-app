@@ -7,11 +7,6 @@ const Habit = () => {
   const dispatch = useAppDispatch();
   const habits = useAppSelector((state) => state.daily.userHabit);
 
-  // const createDaily = (): void => {
-  //   dispatch(dailyActions.createDailyPlan(habits));
-  //   // dispatch(dailyActions.setHabits([]));
-  // };
-
   return (
     <div
       className={`${styles["daily-habits"]} mb-5 col-md-mb-0 col-12 col-md-6`}
@@ -21,12 +16,7 @@ const Habit = () => {
           <h4 className="mb-4">Your daily plans</h4>
           <div className="container">
             {habits.map((habit) => (
-              <HabitItem
-                id={habit.id}
-                day={habit.day}
-                key={habit.id}
-                // createDailyFn={createDaily}
-              />
+              <HabitItem id={habit.dayId} day={habit.day} key={habit.dayId} />
             ))}
           </div>
         </>

@@ -6,6 +6,8 @@ import { dailyActions } from "../../redux/daily-slice";
 import Button from "../UI/Button";
 import { days } from "../../helpers/Constants";
 
+let habitNumber = 0;
+
 const HabitForm = () => {
   const [isShownForm, setIsShownForm] = useState(false);
   const [day, setDay] = useState("");
@@ -17,6 +19,7 @@ const HabitForm = () => {
   const habits = useAppSelector((state) => state.daily.userHabit);
 
   const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    habitNumber++;
     e.preventDefault();
     if (habitText === "" || startTime === "" || endTime === "")
       alert("Inputs cannot be left blank");
@@ -33,6 +36,7 @@ const HabitForm = () => {
         startTime,
         endTime,
         day,
+        habitId: habitNumber,
       };
       dispatch(dailyActions.addHabit(userHabit));
       setHabitText("");

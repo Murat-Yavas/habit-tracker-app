@@ -3,14 +3,15 @@ import { days } from "../helpers/Constants";
 
 export interface UserHabit {
   day: string;
-  habitName: string;
-  startTime: string;
-  endTime: string;
-  id: number;
+  habitName?: string;
+  startTime?: string;
+  endTime?: string;
+  id?: number;
   habitsOfDay?: string[];
   habitsStartTime: string[];
   habitsEndTime: string[];
   dayId: number;
+  habitInfo: { id: number; name: string; startTime: string; endTime: string }[];
 }
 
 interface DailyState {
@@ -31,6 +32,7 @@ const dailySlice = createSlice({
         startTime: string;
         endTime: string;
         day: string;
+        habitId: number;
       }>
     ) => {
       let day = state.userHabit.find(
@@ -39,42 +41,58 @@ const dailySlice = createSlice({
       if (!day) {
         state.userHabit.push({
           day: action.payload.day,
-          habitName: action.payload.habitName,
-          startTime: action.payload.startTime,
-          endTime: action.payload.endTime,
-          id: state.userHabit.length,
           habitsOfDay: [action.payload.habitName],
           habitsStartTime: [action.payload.startTime],
           habitsEndTime: [action.payload.endTime],
           dayId: days.indexOf(action.payload.day),
+          habitInfo: [
+            {
+              id: action.payload.habitId,
+              name: action.payload.habitName,
+              startTime: action.payload.startTime,
+              endTime: action.payload.endTime,
+            },
+          ],
         });
         state.userHabit.sort((a, b) => (a.dayId > b.dayId ? 1 : -1));
       } else {
         day.habitsOfDay?.push(action.payload.habitName);
         day.habitsStartTime.push(action.payload.startTime);
         day.habitsEndTime.push(action.payload.endTime);
+        day.habitInfo.push({
+          id: action.payload.habitId,
+          name: action.payload.habitName,
+          startTime: action.payload.startTime,
+          endTime: action.payload.endTime,
+        });
       }
     },
 
-    // setHabits: (state, action: PayloadAction<UserHabit[]>) => {
-    //   state.userHabit = action.payload;
-    // },
-
-    deleteHabit: (state, action: PayloadAction<number>) => {
-      const newHabits = state.userHabit.filter(
-        (habit) => habit.id !== action.payload
+    deleteHabit: (
+      state,
+      action: PayloadAction<{
+        id: number;
+        dayName: string;
+        temp: {
+          id: number;
+          name: string;
+          startTime: string;
+          endTime: string;
+        }[];
+      }>
+    ) => {
+      let day = state.userHabit.find(
+        (habit) => habit.day === action.payload.dayName
       );
-      state.userHabit = newHabits;
+      if (!day) {
+        state.userHabit = [];
+      } else {
+        [...state.userHabit];
+        day.habitInfo = action.payload.temp;
+      }
     },
-
-    // createDailyPlan: (state, action: PayloadAction<UserHabit[]>) => {
-    //   state.dailyPlan = action.payload;
-    // },
   },
 });
 
 export const dailyActions = dailySlice.actions;
 export default dailySlice;
-
-// action.payload.startTime,
-// action.payload.endTime,
