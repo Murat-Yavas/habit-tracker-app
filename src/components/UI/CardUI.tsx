@@ -4,7 +4,7 @@ import styles from "./CardUI.module.css";
 import { dailyActions } from "../../redux/daily-slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { useState } from "react";
-import { days } from "../../helpers/Constants";
+import { toast } from "react-toastify";
 
 interface CardProps {
   src: string;
@@ -29,14 +29,24 @@ const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
 
   const handleDeleteHabit = (id: number) => {
     let selectedDay = dailyPlan.find((day) => day.day === dayName);
-    let temp = selectedDay?.habitInfo.filter((h) => h.id === id)!;
-
-    console.log(selectedDay);
+    let temp = selectedDay?.habitInfo.filter((h) => h.id !== id)!;
+    console.log(dailyPlan);
     if (selectedDay?.habitInfo.length === 1) {
       temp = [];
     }
 
     dispatch(dailyActions.deleteHabit({ id, dayName, temp }));
+
+    toast.info(`A habit successfully deleted from ${dayName}`, {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   };
 
   return (
@@ -67,15 +77,12 @@ const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
                     <div className="col-6">
                       {habit.startTime} - {habit.endTime}
                     </div>
-                    {dailyHabitInfos.map((h) => (
-                      <div
-                        key={h.id}
-                        className={`${styles["delete-button"]} col-2`}
-                        onClick={() => handleDeleteHabit(h.id)}
-                      >
-                        X
-                      </div>
-                    ))}
+                    <div
+                      className={`${styles["delete-button"]} col-2`}
+                      onClick={() => handleDeleteHabit(habit.id)}
+                    >
+                      X
+                    </div>
                   </div>
                 ))}
               </Card.Text>

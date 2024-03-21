@@ -15,7 +15,9 @@
   transition: 0.2s;
 }
 
-.daily-habit-name {
+.daily-habit-info {
   text-decoration: none;
   color: white;
+  display: flex;
+  justify-content: space-around;
 }

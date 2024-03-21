@@ -3,6 +3,12 @@
   margin-bottom: 2rem;
 }
 
+.card-image {
+  max-width: 100%;
+  height: 13rem;
+  margin-bottom: 1rem;
+}
+
 .card-body {
   margin-bottom: 2.75rem;
   height: 125px;
@@ -31,6 +37,12 @@
   border-color: #79abc8;
   transition: 0.2s;
 }
+/* 
+.delete-button {
+  position: absolute;
+  right: 0;
+  top: 4px;
+} */
 
 .view-button {
   margin-top: 0.5rem;
@@ -40,10 +52,4 @@
   top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.card-image {
-  max-width: 100%;
-  height: 13rem;
-  margin-bottom: 1rem;
 }

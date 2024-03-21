@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import Button from "../UI/Button";
 import { userActions } from "../../redux/user-slice";
 
 const Header = () => {
@@ -22,9 +21,13 @@ const Header = () => {
 
       <div className={styles["user-session"]}>
         {isLogin ? (
-          <Button onClick={handleLogout} className={styles["log-button"]}>
+          <NavLink
+            to="/"
+            onClick={handleLogout}
+            className={styles["log-button"]}
+          >
             Logout
-          </Button>
+          </NavLink>
         ) : (
           <NavLink to="/login" className={styles["log-button"]}>
             Login
