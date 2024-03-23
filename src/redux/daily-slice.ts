@@ -90,7 +90,6 @@ const dailySlice = createSlice({
     },
 
     updateDailyPlan: (state, action: PayloadAction<DailyPlan[]>) => {
-      // state.dailyPlan = [];
       state.dailyPlan = action.payload;
     },
   },

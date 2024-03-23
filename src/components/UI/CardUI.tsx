@@ -22,16 +22,10 @@ const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
   const dispatch = useAppDispatch();
   const [showCardText, setShowCardText] = useState(false);
   let dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
-  console.log(dailyHabitInfos);
-  console.log(dailyPlan);
 
   let plan = dailyPlan.find(
     (day) => day.day === dayName && day.habitInfo.length > 0
   );
-
-  // dailyHabitInfos.sort((a, b) =>
-  //   +a.startTime.slice(0, 2) > +b.startTime.slice(0, 2) ? -1 : 1
-  // );
 
   const handleDeleteHabit = (id: number) => {
     let selectedDay = dailyPlan.find((day) => day.day === dayName);
@@ -40,7 +34,6 @@ const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
     if (selectedDay?.habitInfo.length === 1) {
       temp = [];
       dailyPlan = dailyPlan.filter((daily) => daily.day !== plan?.day);
-      console.log(dailyPlan);
       dispatch(dailyActions.updateDailyPlan(dailyPlan));
     } else {
       dispatch(dailyActions.deleteHabit({ id, dayName, temp }));
