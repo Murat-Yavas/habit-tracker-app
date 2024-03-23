@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./HabitForm.module.css";
 import Form from "react-bootstrap/Form";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { dailyActions } from "../../redux/daily-slice";
 import Button from "../UI/Button";
 import { days } from "../../helpers/Constants";
