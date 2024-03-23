@@ -6,7 +6,7 @@ import Button from "../UI/Button";
 import styles from "./DailyPlanDetails.module.css";
 
 const DailyPlanDetails = () => {
-  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
+  const { dailyPlan } = useAppSelector((state) => state.daily);
 
   return (
     <>

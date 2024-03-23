@@ -16,23 +16,46 @@ const HabitForm = () => {
   const [endTime, setEndTime] = useState("");
 
   const dispatch = useAppDispatch();
-  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
-  let plan = dailyPlan.map((plan) => plan.habitInfo);
-
-  console.log(plan.map((p) => p.length));
+  console.log(+startTime.slice(0, 2));
 
   const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    habitNumber++;
-    e.preventDefault();
     if (habitText === "" || startTime === "" || endTime === "")
-      alert("Inputs cannot be left blank");
-    else if (+startTime.slice(0, 2) > +endTime.slice(0, 2)) {
-      alert("End time cannot be bigger than start time");
-    } else if (
-      parseInt(startTime) === parseInt(endTime) &&
-      +startTime.slice(3, 5) > +endTime.slice(3, 5)
+      toast.info("Inputs cannot be left blank", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    else if (
+      +startTime.slice(0, 2) > +endTime.slice(0, 2) ||
+      (parseInt(startTime) === parseInt(endTime) &&
+        +startTime.slice(3, 5) > +endTime.slice(3, 5))
     ) {
-      alert("end minute ");
+      toast.info("End time cannot be bigger than start time", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    } else if (habitText.length > 10) {
+      toast.info("A maximum of 10 characters can be entered", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } else {
       const userHabit = {
         habitName: habitText,
@@ -46,17 +69,22 @@ const HabitForm = () => {
       setStartTime("");
       setEndTime("");
 
-      toast.info(`Habit -${habitText}- successfully saved for ${day}`, {
-        position: "top-center",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.info(
+        `Habit ${habitText.toUpperCase()} successfully saved for ${day}`,
+        {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
     }
+    habitNumber++;
+    e.preventDefault();
   };
 
   return (

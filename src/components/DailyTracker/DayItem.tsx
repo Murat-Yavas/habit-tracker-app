@@ -9,7 +9,7 @@ interface HabitItem {
 }
 
 const HabitItem = ({ id, dayName }: HabitItem) => {
-  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
+  const dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
 
   let plan = dailyPlan.find((day) => day.day === dayName);
 
@@ -29,4 +29,3 @@ const HabitItem = ({ id, dayName }: HabitItem) => {
 };
 
 export default HabitItem;
-//plan?.habitInfo.length

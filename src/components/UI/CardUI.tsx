@@ -21,21 +21,30 @@ interface CardProps {
 const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
   const dispatch = useAppDispatch();
   const [showCardText, setShowCardText] = useState(false);
-  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
+  let dailyPlan = useAppSelector((state) => state.daily.dailyPlan);
+  console.log(dailyHabitInfos);
+  console.log(dailyPlan);
+
   let plan = dailyPlan.find(
     (day) => day.day === dayName && day.habitInfo.length > 0
   );
-  console.log(plan);
+
+  // dailyHabitInfos.sort((a, b) =>
+  //   +a.startTime.slice(0, 2) > +b.startTime.slice(0, 2) ? -1 : 1
+  // );
 
   const handleDeleteHabit = (id: number) => {
     let selectedDay = dailyPlan.find((day) => day.day === dayName);
+
     let temp = selectedDay?.habitInfo.filter((h) => h.id !== id)!;
-    console.log(dailyPlan);
     if (selectedDay?.habitInfo.length === 1) {
       temp = [];
+      dailyPlan = dailyPlan.filter((daily) => daily.day !== plan?.day);
+      console.log(dailyPlan);
+      dispatch(dailyActions.updateDailyPlan(dailyPlan));
+    } else {
+      dispatch(dailyActions.deleteHabit({ id, dayName, temp }));
     }
-
-    dispatch(dailyActions.deleteHabit({ id, dayName, temp }));
 
     toast.info(`A habit successfully deleted from ${dayName}`, {
       position: "top-center",
@@ -78,7 +87,7 @@ const CardUI = ({ src, title, dailyHabitInfos, dayName }: CardProps) => {
                       {habit.startTime} - {habit.endTime}
                     </div>
                     <div
-                      className={`${styles["delete-button"]} col-2`}
+                      className={`${styles["delete-button"]} col-1`}
                       onClick={() => handleDeleteHabit(habit.id)}
                     >
                       X

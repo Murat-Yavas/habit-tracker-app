@@ -4,8 +4,7 @@ import styles from "./Day.module.css";
 import DayItem from "./DayItem";
 
 const Habit = () => {
-  const dailyPlan = useAppSelector((state) => state.daily.userHabit);
-  console.log(dailyPlan);
+  const { dailyPlan } = useAppSelector((state) => state.daily);
 
   return (
     <div

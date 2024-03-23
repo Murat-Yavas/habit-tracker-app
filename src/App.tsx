@@ -3,7 +3,6 @@ import "./App.css";
 import Root from "./pages/Root";
 import HomePage from "./pages/Home";
 import DailyTrackerPage from "./pages/DailyTracker";
-import WeeklyTrackerPage from "./pages/WeeklyTracker";
 import DailyPlanDetailsPage from "./pages/DailyPlanDetails";
 import LoginPage from "./pages/Login";
 
@@ -15,7 +14,6 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: "/daily", element: <DailyTrackerPage /> },
       { path: "/daily/details", element: <DailyPlanDetailsPage /> },
-      { path: "/weekly", element: <WeeklyTrackerPage /> },
       { path: "/login", element: <LoginPage /> },
     ],
   },

@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { days } from "../helpers/Constants";
 
-export interface UserHabit {
+export interface DailyPlan {
   day: string;
   habitName?: string;
   startTime?: string;
@@ -15,10 +15,10 @@ export interface UserHabit {
 }
 
 interface DailyState {
-  userHabit: UserHabit[];
+  dailyPlan: DailyPlan[];
 }
 
-const initialState: DailyState = { userHabit: [] };
+const initialState: DailyState = { dailyPlan: [] };
 
 const dailySlice = createSlice({
   name: "daily",
@@ -34,11 +34,11 @@ const dailySlice = createSlice({
         habitId: number;
       }>
     ) => {
-      let day = state.userHabit.find(
+      let day = state.dailyPlan.find(
         (habit) => habit.day === action.payload.day
       );
       if (!day) {
-        state.userHabit.push({
+        state.dailyPlan.push({
           day: action.payload.day,
           dayId: days.indexOf(action.payload.day),
           habitInfo: [
@@ -50,7 +50,7 @@ const dailySlice = createSlice({
             },
           ],
         });
-        state.userHabit.sort((a, b) => (a.dayId > b.dayId ? 1 : -1));
+        state.dailyPlan.sort((a, b) => (a.dayId > b.dayId ? 1 : -1));
       } else {
         day.habitInfo.push({
           id: action.payload.habitId,
@@ -59,6 +59,11 @@ const dailySlice = createSlice({
           endTime: action.payload.endTime,
         });
       }
+      state.dailyPlan.map((daily) =>
+        daily.habitInfo.sort((a, b) =>
+          +a.startTime.slice(0, 2) > +b.startTime.slice(0, 2) ? 1 : -1
+        )
+      );
     },
 
     deleteHabit: (
@@ -74,14 +79,19 @@ const dailySlice = createSlice({
         }[];
       }>
     ) => {
-      let dayItem = state.userHabit.find(
+      let dayItem = state.dailyPlan.find(
         (habit) => habit.day === action.payload.dayName
       );
       if (!dayItem) {
-        state.userHabit = [];
+        state.dailyPlan = [];
       } else {
         dayItem.habitInfo = action.payload.temp;
       }
+    },
+
+    updateDailyPlan: (state, action: PayloadAction<DailyPlan[]>) => {
+      // state.dailyPlan = [];
+      state.dailyPlan = action.payload;
     },
   },
 });

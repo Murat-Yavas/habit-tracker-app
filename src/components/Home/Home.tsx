@@ -49,28 +49,11 @@ const Home = () => {
             </NavLink>
           </Card.Body>
         </Card>
-
-        <Card style={{ width: "18rem" }} className={`${styles["home-card"]}`}>
-          <Card.Img
-            className={`${styles["card-image"]}`}
-            variant="top"
-            src={HomePlan1}
-          />
-          <Card.Body className={`${styles["card-body"]}`}>
-            <Card.Title className="text-center mb-6">
-              Organize your week realistically
-            </Card.Title>
-
-            <NavLink to="/weekly" className={`${styles.button}`}>
-              Weekly Plan
-            </NavLink>
-          </Card.Body>
-        </Card>
       </div>
     </div>
   ) : (
     <h2 className="text-white text-center">
-      You need to login to create a tracker plan
+      You need to login first to create a tracker plan
     </h2>
   );
 };
