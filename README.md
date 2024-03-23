@@ -1,4 +1,4 @@
-A traditional habit tracker application that users can add their daily habits and delete them easily. Check it out [here]().
+A traditional habit tracker application that users can add their daily habits and delete them easily. Check it out [here](https://habit-tracker-app-rho.vercel.app/).
 
 # Technologies
 
