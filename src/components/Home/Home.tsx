@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Home.module.css";
 import Card from "react-bootstrap/Card";
-import HomePlan1 from "../../assets/HomePlan1.jpg";
 import HomePlan2 from "../../assets/HomePlan2.jpg";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { getQuotes } from "../../redux/api/apiCall";
